@@ -232,6 +232,30 @@ def analyze(path: Path, test_name: str | None, control: str, alpha: float) -> di
         control = groups[0]
         warnings.append(f"Grupo de controle informado nao existe — usando '{control}'.")
 
+    # Sample Ratio Mismatch: split de trafego deveria ser equilibrado entre variantes.
+    total_buyers = sum(r["buyers"] for r in summary)
+    if total_buyers:
+        expected = 1 / len(summary)
+        for row in summary:
+            share = row["buyers"] / total_buyers
+            if abs(share / expected - 1) > 0.10:
+                warnings.append(
+                    f"Possivel Sample Ratio Mismatch: {row['group']} concentra "
+                    f"{share*100:.1f}% dos compradores (esperado ~{expected*100:.1f}%). "
+                    "Checar a divisao de trafego antes de confiar no resultado."
+                )
+
+    for row in summary:
+        if row["cashback"] and abs(row["cashback"] - row["commission"]) / row["commission"] < 0.001:
+            warnings.append(
+                f"{row['group']}: cashback igual a comissao (margem liquida zero). "
+                "Provavel erro de instrumentacao ou oferta insustentavel."
+            )
+        if row["cashback"] > row["commission"]:
+            warnings.append(
+                f"{row['group']}: cashback maior que a comissao — a variante opera no negativo."
+            )
+
     base = next(r for r in summary if r["group"] == control)
     comparisons = []
     for row in summary:
