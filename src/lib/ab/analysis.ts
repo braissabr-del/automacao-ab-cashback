@@ -313,7 +313,7 @@ export function welchTTest(sample: number[], control: number[]) {
     (va / a.length + vb / b.length) ** 2 /
     ((va / a.length) ** 2 / (a.length - 1) + (vb / b.length) ** 2 / (b.length - 1));
   const upper = 0.5 * betainc(df / 2, 0.5, df / (df + t * t));
-  const pValue = Math.min(1, Math.max(0, 2 * (t > 0 ? upper : 1 - upper) > 1 ? 2 * upper : 2 * upper));
+  const pValue = Math.min(1, Math.max(0, 2 * upper));
   const crit = df > 60 ? 1.96 : 2 + (0.5 * Math.max(0, 30 - df)) / 30;
   return { diff, t, df, pValue, ci: [diff - crit * se, diff + crit * se] as [number, number] };
 }
