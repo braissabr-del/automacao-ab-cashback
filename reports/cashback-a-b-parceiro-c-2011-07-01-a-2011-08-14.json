@@ -1,0 +1,73 @@
+{
+  "test_name": "Cashback A/B — Parceiro C (2011-07-01 a 2011-08-14)",
+  "test_slug": "cashback-a-b-parceiro-c-2011-07-01-a-2011-08-14",
+  "source_file": "dataset_03_parceiroC.csv",
+  "partner": "Parceiro C",
+  "period_start": "2011-07-01",
+  "period_end": "2011-08-14",
+  "days": 45,
+  "control": "Grupo 1",
+  "alpha": 0.05,
+  "variants": [
+    "Grupo 1",
+    "Grupo 2"
+  ],
+  "summary": [
+    {
+      "group": "Grupo 1",
+      "days": 45,
+      "buyers": 4549.0,
+      "gmv": 1738460.0,
+      "commission": 121693.0,
+      "cashback": 86924.0,
+      "net": 34769.0,
+      "ticket": 382.16311277203783,
+      "cashback_rate": 0.050000575221747987,
+      "take_rate": 0.07000046017739839,
+      "net_margin": 0.0199998849556504,
+      "net_per_buyer": 7.6432182897340075,
+      "roi_cashback": 0.3999930974184345
+    },
+    {
+      "group": "Grupo 2",
+      "days": 45,
+      "buyers": 4522.0,
+      "gmv": 1685235.0,
+      "commission": 117967.0,
+      "cashback": 117967.0,
+      "net": 0.0,
+      "ticket": 372.6747014595312,
+      "cashback_rate": 0.0700003263639789,
+      "take_rate": 0.0700003263639789,
+      "net_margin": 0.0,
+      "net_per_buyer": 0.0,
+      "roi_cashback": 0.0
+    }
+  ],
+  "comparisons": [
+    {
+      "group": "Grupo 2",
+      "lift_net": -1.0,
+      "lift_net_per_buyer": -1.0,
+      "lift_gmv": -0.030616177536440303,
+      "lift_buyers": -0.005935370411079388,
+      "lift_ticket": -0.02482817151996175,
+      "net_delta": -34769.0,
+      "p_value_net_per_buyer": 4.937265872561104e-44,
+      "ci_net_per_buyer": [
+        -7.901587093753886,
+        -7.396695959278539
+      ],
+      "p_value_gmv_per_buyer": 0.26627315137576424,
+      "significant": true
+    }
+  ],
+  "decision": "manter_controle",
+  "winner": "Grupo 1",
+  "rationale": "Nenhuma variante superou o controle (Grupo 1) em receita liquida (comissao - cashback). Manter o controle em 100% do trafego.",
+  "warnings": [
+    "90 de 90 linhas aproveitadas na analise."
+  ],
+  "outliers": [],
+  "generated_at": "2026-08-16T22:22:48+00:00"
+}
