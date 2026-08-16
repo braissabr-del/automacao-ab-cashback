@@ -1,0 +1,124 @@
+{
+  "test_name": "Cashback A/B — Parceiro B (2011-05-01 a 2011-06-30)",
+  "test_slug": "cashback-a-b-parceiro-b-2011-05-01-a-2011-06-30",
+  "source_file": "dataset_02_parceiroB.csv",
+  "partner": "Parceiro B",
+  "period_start": "2011-05-01",
+  "period_end": "2011-06-30",
+  "days": 61,
+  "control": "Grupo 1",
+  "alpha": 0.05,
+  "variants": [
+    "Grupo 1",
+    "Grupo 2",
+    "Grupo 3"
+  ],
+  "summary": [
+    {
+      "group": "Grupo 1",
+      "days": 61,
+      "buyers": 7990.0,
+      "gmv": 4093.818,
+      "commission": 450.321,
+      "cashback": 163.75099999999998,
+      "net": 286.57000000000005,
+      "ticket": 0.5123677096370464,
+      "cashback_rate": 0.039999579854307146,
+      "take_rate": 0.11000024915616669,
+      "net_margin": 0.07000066930185954,
+      "net_per_buyer": 0.03586608260325407,
+      "roi_cashback": 1.7500351142893789
+    },
+    {
+      "group": "Grupo 2",
+      "days": 61,
+      "buyers": 5452.0,
+      "gmv": 2863.0190000000002,
+      "commission": 314.93500000000006,
+      "cashback": 171.77800000000002,
+      "net": 143.15700000000004,
+      "ticket": 0.5251318782098313,
+      "cashback_rate": 0.05999890325561933,
+      "take_rate": 0.11000101640960121,
+      "net_margin": 0.05000211315398187,
+      "net_per_buyer": 0.026257703595011013,
+      "roi_cashback": 0.8333837860494361
+    },
+    {
+      "group": "Grupo 3",
+      "days": 61,
+      "buyers": 5029.0,
+      "gmv": 2629.9629999999997,
+      "commission": 289.29,
+      "cashback": 236.697,
+      "net": 52.59300000000002,
+      "ticket": 0.5229594352754026,
+      "cashback_rate": 0.09000012547705044,
+      "take_rate": 0.109997745215427,
+      "net_margin": 0.019997619738376556,
+      "net_per_buyer": 0.01045794392523365,
+      "roi_cashback": 0.22219546508827748
+    }
+  ],
+  "comparisons": [
+    {
+      "group": "Grupo 2",
+      "lift_net": -0.5004466622465715,
+      "lift_net_per_buyer": -0.26789597053376846,
+      "lift_gmv": -0.3006481968665925,
+      "lift_buyers": -0.3176470588235294,
+      "lift_ticket": 0.024912125281717934,
+      "net_delta": -143.413,
+      "p_value_net_per_buyer": 4.346062745838995e-28,
+      "ci_net_per_buyer": [
+        -0.010721400841362968,
+        -0.008205172640163415
+      ],
+      "p_value_gmv_per_buyer": 0.16434382273667936,
+      "significant": true
+    },
+    {
+      "group": "Grupo 3",
+      "lift_net": -0.816474159891126,
+      "lift_net_per_buyer": -0.7084168895466488,
+      "lift_gmv": -0.3575769611643703,
+      "lift_buyers": -0.37058823529411766,
+      "lift_ticket": 0.0206721177762339,
+      "net_delta": -233.97700000000003,
+      "p_value_net_per_buyer": 2.1077066378846656e-56,
+      "ci_net_per_buyer": [
+        -0.026314357263110932,
+        -0.024222353231352474
+      ],
+      "p_value_gmv_per_buyer": 0.23193357474359366,
+      "significant": true
+    }
+  ],
+  "decision": "manter_controle",
+  "winner": "Grupo 1",
+  "rationale": "Nenhuma variante superou o controle (Grupo 1) em receita liquida (comissao - cashback). Manter o controle em 100% do trafego.",
+  "warnings": [
+    "183 de 183 linhas aproveitadas na analise."
+  ],
+  "outliers": [
+    {
+      "group": "Grupo 1",
+      "date": "2011-05-15",
+      "gmv": 214.464,
+      "z": 5.41
+    },
+    {
+      "group": "Grupo 2",
+      "date": "2011-05-15",
+      "gmv": 159.289,
+      "z": 5.21
+    },
+    {
+      "group": "Grupo 3",
+      "date": "2011-05-15",
+      "gmv": 138.153,
+      "z": 5.15
+    }
+  ],
+  "generated_at": "2026-08-16T22:22:13+00:00"
+}

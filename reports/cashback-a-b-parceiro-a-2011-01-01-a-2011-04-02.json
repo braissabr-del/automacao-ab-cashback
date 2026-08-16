@@ -1,0 +1,124 @@
+{
+  "test_name": "Cashback A/B — Parceiro A (2011-01-01 a 2011-04-02)",
+  "test_slug": "cashback-a-b-parceiro-a-2011-01-01-a-2011-04-02",
+  "source_file": "dataset_01_parceiroA.csv",
+  "partner": "Parceiro A",
+  "period_start": "2011-01-01",
+  "period_end": "2011-04-02",
+  "days": 92,
+  "control": "Grupo 1",
+  "alpha": 0.05,
+  "variants": [
+    "Grupo 1",
+    "Grupo 2",
+    "Grupo 3"
+  ],
+  "summary": [
+    {
+      "group": "Grupo 1",
+      "days": 92,
+      "buyers": 9633.0,
+      "gmv": 5605.173,
+      "commission": 638.1349999999999,
+      "cashback": 5176.476,
+      "net": -4538.340999999999,
+      "ticket": 0.5818720024914357,
+      "cashback_rate": 0.9235176148889606,
+      "take_rate": 0.11384751193228111,
+      "net_margin": -0.8096701029566794,
+      "net_per_buyer": -0.47112436416484993,
+      "roi_cashback": -0.8767240493339483
+    },
+    {
+      "group": "Grupo 2",
+      "days": 92,
+      "buyers": 10814.0,
+      "gmv": 6423.096,
+      "commission": 728.1779999999999,
+      "cashback": 1312.716,
+      "net": -584.538,
+      "ticket": 0.59396116145737,
+      "cashback_rate": 0.2043743391037593,
+      "take_rate": 0.11336869322831232,
+      "net_margin": -0.09100564587544699,
+      "net_per_buyer": -0.05405381912335861,
+      "roi_cashback": -0.44528900386679227
+    },
+    {
+      "group": "Grupo 3",
+      "days": 92,
+      "buyers": 11410.0,
+      "gmv": 6785.856000000002,
+      "commission": 767.8870000000001,
+      "cashback": 2255.846,
+      "net": -1487.9589999999998,
+      "ticket": 0.5947288343558284,
+      "cashback_rate": 0.33243352054626557,
+      "take_rate": 0.11315993148100989,
+      "net_margin": -0.21927358906525565,
+      "net_per_buyer": -0.1304083260297984,
+      "roi_cashback": -0.659601320302893
+    }
+  ],
+  "comparisons": [
+    {
+      "group": "Grupo 2",
+      "lift_net": -0.8712000706866232,
+      "lift_net_per_buyer": -0.8852663474130054,
+      "lift_gmv": 0.1459228823088956,
+      "lift_buyers": 0.12259939790304153,
+      "lift_ticket": 0.020776320074125332,
+      "net_delta": 3953.8029999999994,
+      "p_value_net_per_buyer": 0.08321686249191833,
+      "ci_net_per_buyer": [
+        -0.11298990949989551,
+        1.9472755758699463
+      ],
+      "p_value_gmv_per_buyer": 0.5241913557357727,
+      "significant": false
+    },
+    {
+      "group": "Grupo 3",
+      "lift_net": -0.6721359192709406,
+      "lift_net_per_buyer": -0.7231976608533717,
+      "lift_gmv": 0.2106416697575617,
+      "lift_buyers": 0.184470050866812,
+      "lift_ticket": 0.022095635825994053,
+      "net_delta": 3050.3819999999996,
+      "p_value_net_per_buyer": 0.22201793944559045,
+      "ci_net_per_buyer": [
+        -0.41602975761868766,
+        1.805481585066763
+      ],
+      "p_value_gmv_per_buyer": 0.5488396942737921,
+      "significant": false
+    }
+  ],
+  "decision": "inconclusivo",
+  "winner": "Grupo 1",
+  "rationale": "Grupo 2 lidera a receita liquida (+-87.1%), mas a diferenca no liquido por comprador nao e significante (p=0.0832). Manter o controle e estender o teste.",
+  "warnings": [
+    "276 de 276 linhas aproveitadas na analise."
+  ],
+  "outliers": [
+    {
+      "group": "Grupo 2",
+      "date": "2011-01-13",
+      "gmv": 230.953,
+      "z": 4.28
+    },
+    {
+      "group": "Grupo 1",
+      "date": "2011-01-13",
+      "gmv": 185.913,
+      "z": 3.9
+    },
+    {
+      "group": "Grupo 3",
+      "date": "2011-01-13",
+      "gmv": 228.467,
+      "z": 3.75
+    }
+  ],
+  "generated_at": "2026-08-16T22:22:12+00:00"
+}
