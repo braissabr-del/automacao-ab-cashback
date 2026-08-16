@@ -30,7 +30,7 @@ export function TrendCharts({ result }: { result: AnalysisResult }) {
 
   const bars = result.summary.map((s) => ({
     group: s.group,
-    liquido: Math.round(s.net),
+    líquido: Math.round(s.net),
     cashback: Math.round(s.cashback),
   }));
 
@@ -102,7 +102,7 @@ export function TrendCharts({ result }: { result: AnalysisResult }) {
               />
               <Legend wrapperStyle={{ fontSize: 12 }} />
               <Bar dataKey="cashback" name="Cashback pago" fill="var(--chart-3)" radius={[6, 6, 0, 0]} />
-              <Bar dataKey="liquido" name="Receita líquida" fill="var(--chart-1)" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="líquido" name="Receita líquida" fill="var(--chart-1)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

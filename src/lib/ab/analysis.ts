@@ -1,7 +1,7 @@
 /**
- * Motor de analise de testes A/B de cashback.
+ * Motor de análise de testes A/B de cashback.
  * Mesma logica do script Python em /analysis (parsing tolerante, metricas de
- * margem liquida, teste t de Welch e regra de decisao).
+ * margem líquida, teste t de Welch e regra de decisão).
  */
 
 export type DailyRow = {
@@ -79,12 +79,12 @@ const norm = (s: string) =>
 const COLUMN_ALIASES: Record<string, keyof RawRow> = {
   data: "date",
   date: "date",
-  "grupos de usuarios": "group",
+  "grupos de usuários": "group",
   grupo: "group",
   variante: "group",
   parceiro: "partner",
   compradores: "buyers",
-  comissao: "commission",
+  comissão: "commission",
   cashback: "cashback",
   "vendas totais": "gmv",
   gmv: "gmv",
@@ -220,7 +220,7 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
   if (zeroBuyers) warnings.push(`${zeroBuyers} dia(s) com 0 compradores.`);
   const dups = rowsIn - badDate - incomplete - byKey.size;
   if (dups > 0)
-    warnings.push(`${dups} par(es) data+variante duplicados — agregados por soma antes da analise.`);
+    warnings.push(`${dups} par(es) data+variante duplicados — agregados por soma antes da análise.`);
 
   const rows = [...byKey.values()].map((r) => ({
     ...r,
@@ -229,13 +229,13 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
     gmvPerBuyer: r.buyers ? r.gmv / r.buyers : NaN,
   }));
   if (!rows.length) throw new Error("Nenhuma linha valida apos a limpeza — verifique o arquivo.");
-  warnings.push(`${rows.length} de ${rowsIn} linhas aproveitadas na analise.`);
+  warnings.push(`${rows.length} de ${rowsIn} linhas aproveitadas na análise.`);
 
   rows.sort((a, b) => (a.group === b.group ? a.date.localeCompare(b.date) : a.group.localeCompare(b.group)));
   return { rows, warnings };
 }
 
-/* ---------------------------- estatistica ---------------------------- */
+/* ---------------------------- estatística ---------------------------- */
 
 const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
 const variance = (xs: number[]) => {
@@ -318,7 +318,7 @@ export function welchTTest(sample: number[], control: number[]) {
   return { diff, t, df, pValue, ci: [diff - crit * se, diff + crit * se] as [number, number] };
 }
 
-/* ------------------------------ analise ------------------------------ */
+/* ------------------------------ análise ------------------------------ */
 
 function summarize(rows: DailyRow[]): GroupSummary[] {
   const groups = [...new Set(rows.map((r) => r.group))].sort();
@@ -397,16 +397,16 @@ export function analyze(
     const share = s.buyers / totalBuyers;
     if (Math.abs(share / expected - 1) > 0.1)
       warnings.push(
-        `Possivel Sample Ratio Mismatch: ${s.group} concentra ${(share * 100).toFixed(1)}% dos compradores (esperado ~${(expected * 100).toFixed(1)}%). Checar a divisao de trafego.`,
+        `Possível Sample Ratio Mismatch: ${s.group} concentra ${(share * 100).toFixed(1)}% dos compradores (esperado ~${(expected * 100).toFixed(1)}%). Checar a divisão de tráfego.`,
       );
   }
   for (const s of summary) {
     if (s.commission && Math.abs(s.cashback - s.commission) / s.commission < 0.001)
       warnings.push(
-        `${s.group}: cashback igual a comissao (margem liquida zero) — provavel erro de instrumentacao ou oferta insustentavel.`,
+        `${s.group}: cashback igual a comissão (margem líquida zero) — provavel erro de instrumentacao ou oferta insustentavel.`,
       );
     else if (s.cashback > s.commission)
-      warnings.push(`${s.group}: cashback maior que a comissao — a variante opera no negativo.`);
+      warnings.push(`${s.group}: cashback maior que a comissão — a variante opera no negativo.`);
   }
 
   const base = summary.find((s) => s.group === control)!;
@@ -438,17 +438,17 @@ export function analyze(
   if (best.group === control) {
     decision = "manter_controle";
     winner = control;
-    rationale = `Nenhuma variante superou o controle (${control}) em receita liquida (comissao - cashback). Manter o controle em 100% do trafego.`;
+    rationale = `Nenhuma variante superou o controle (${control}) em receita líquida (comissão - cashback). Manter o controle em 100% do tráfego.`;
   } else {
     const comp = comparisons.find((c) => c.group === best.group)!;
     if (comp.significant) {
       decision = "escalar_variante";
       winner = best.group;
-      rationale = `${best.group} lidera a receita liquida (${(comp.liftNet * 100).toFixed(1)}% vs ${control}) com diferenca estatisticamente significante no liquido por comprador (p=${comp.pValue.toFixed(4)}). Escalar para 100% do trafego.`;
+      rationale = `${best.group} lidera a receita líquida (${(comp.liftNet * 100).toFixed(1)}% vs ${control}) com diferença estatisticamente significante no líquido por comprador (p=${comp.pValue.toFixed(4)}). Escalar para 100% do tráfego.`;
     } else {
       decision = "inconclusivo";
       winner = control;
-      rationale = `${best.group} lidera a receita liquida (${(comp.liftNet * 100).toFixed(1)}%), mas a diferenca no liquido por comprador nao e significante (p=${comp.pValue.toFixed(4)}). Manter o controle e estender o teste.`;
+      rationale = `${best.group} lidera a receita líquida (${(comp.liftNet * 100).toFixed(1)}%), mas a diferença no líquido por comprador nao e significante (p=${comp.pValue.toFixed(4)}). Manter o controle e estender o teste.`;
     }
   }
 
@@ -491,9 +491,9 @@ export const DECISION_LABEL: Record<Decision, string> = {
 /** Linha do registro de acompanhamento (planilha de testes). */
 export function trackingRow(r: AnalysisResult): string[] {
   const comp = r.comparisons.find((c) => c.group === r.winner);
-  const decisao =
+  const decisão =
     r.decision === "escalar_variante"
-      ? `Escalar ${r.winner} para 100% do trafego`
+      ? `Escalar ${r.winner} para 100% do tráfego`
       : r.decision === "manter_controle"
         ? `Manter ${r.control} (controle)`
         : `Manter ${r.control} e estender o teste`;
@@ -505,8 +505,8 @@ export function trackingRow(r: AnalysisResult): string[] {
     `${r.periodStart} a ${r.periodEnd}`,
     r.variants.join(", "),
     r.rationale,
-    decisao,
-    "Receita liquida (comissao - cashback)",
+    decisão,
+    "Receita líquida (comissão - cashback)",
     comp ? `${(comp.liftNet * 100).toFixed(1)}%` : "0.0%",
     comp ? comp.pValue.toFixed(4) : "-",
     comp ? comp.netDelta.toFixed(0) : "0",
@@ -519,10 +519,10 @@ export const TRACKING_HEADER = [
   "nome_do_teste",
   "descricao",
   "parceiro",
-  "periodo",
+  "período",
   "variantes",
   "resultado",
-  "decisao",
+  "decisão",
   "metrica_principal",
   "lift_receita_liquida",
   "p_valor",
