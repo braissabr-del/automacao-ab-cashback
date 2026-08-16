@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { BarChart3, Sparkles } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { Uploader } from "@/components/ab/Uploader";
@@ -33,20 +33,18 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [source, setSource] = useState<{ file: string; text: string } | null>(null);
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const result: AnalysisResult | null = useMemo(() => {
-    if (!source) return null;
+  const handleData = (file: string, text: string) => {
     try {
-      const r = analyze(source.text, { sourceFile: source.file });
+      setResult(analyze(text, { sourceFile: file }));
       setError(null);
-      return r;
     } catch (e) {
+      setResult(null);
       setError((e as Error).message);
-      return null;
     }
-  }, [source]);
+  };
 
   return (
     <main className="min-h-screen bg-background">
@@ -74,7 +72,7 @@ function Index() {
       </header>
 
       <div className="mx-auto max-w-6xl space-y-6 px-6 py-8">
-        <Uploader onData={(file, text) => setSource({ file, text })} />
+        <Uploader onData={handleData} />
 
         {error ? (
           <div className="rounded-2xl border border-destructive/40 bg-destructive/10 p-5 text-sm text-foreground">
