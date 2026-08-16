@@ -14,23 +14,23 @@ Nenhuma variante superou o controle (Grupo 1) em receita liquida (comissao - cas
 
 | Variante | Dias | Compradores | GMV | Comissao | Cashback | Receita liquida | Ticket medio | % cashback / GMV | Margem liquida | Liquido / comprador |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **Grupo 1** (controle) | 61 | 7.990 | R$ 4.094 | R$ 450 | R$ 164 | **R$ 287** | R$ 1 | 4.00% | 7.00% | R$ 0 |
-| **Grupo 2** | 61 | 5.452 | R$ 2.863 | R$ 315 | R$ 172 | **R$ 143** | R$ 1 | 6.00% | 5.00% | R$ 0 |
-| **Grupo 3** | 61 | 5.029 | R$ 2.630 | R$ 289 | R$ 237 | **R$ 53** | R$ 1 | 9.00% | 2.00% | R$ 0 |
+| **Grupo 1** (controle) | 61 | 7.990 | R$ 4.093.818 | R$ 450.321 | R$ 163.751 | **R$ 286.570** | R$ 512 | 4.00% | 7.00% | R$ 36 |
+| **Grupo 2** | 61 | 5.452 | R$ 2.863.019 | R$ 314.935 | R$ 171.778 | **R$ 143.157** | R$ 525 | 6.00% | 5.00% | R$ 26 |
+| **Grupo 3** | 61 | 5.029 | R$ 2.629.963 | R$ 289.290 | R$ 236.697 | **R$ 52.593** | R$ 523 | 9.00% | 2.00% | R$ 10 |
 
 ## 3. Comparacao vs controle
 
 | Variante | Δ Receita liquida | Δ liquido/comprador | Δ GMV | Δ Compradores | Δ Ticket | Impacto liquido no periodo | p-valor | Significante (α=0.05) |
 |---|---:|---:|---:|---:|---:|---:|---:|:--:|
-| **Grupo 2** | -50.0% | -26.8% | -30.1% | -31.8% | +2.5% | -R$ 143 | 0.0000 | Sim |
-| **Grupo 3** | -81.6% | -70.8% | -35.8% | -37.1% | +2.1% | -R$ 234 | 0.0000 | Sim |
+| **Grupo 2** | -50.0% | -26.8% | -30.1% | -31.8% | +2.5% | -R$ 143.413 | 0.0000 | Sim |
+| **Grupo 3** | -81.6% | -70.8% | -35.8% | -37.1% | +2.1% | -R$ 233.977 | 0.0000 | Sim |
 
 O p-valor vem de um teste t de Welch sobre a serie diaria de receita liquida por comprador (variancias desiguais, amostras possivelmente desbalanceadas).
 
 ## 4. Leitura critica dos dados
 
 - 183 de 183 linhas aproveitadas na analise.
-- 3 dia(s) atipico(s) de GMV (|z| ≥ 3,5), que podem inflar medias: Grupo 1 2011-05-15 (R$ 214, z=5.41), Grupo 2 2011-05-15 (R$ 159, z=5.21), Grupo 3 2011-05-15 (R$ 138, z=5.15)
+- 3 dia(s) atipico(s) de GMV (|z| ≥ 3,5), que podem inflar medias: Grupo 1 2011-05-15 (R$ 214.464, z=5.41), Grupo 2 2011-05-15 (R$ 159.289, z=5.21), Grupo 3 2011-05-15 (R$ 138.153, z=5.15)
 
 ## 5. Proximos passos sugeridos
 
@@ -38,4 +38,4 @@ O p-valor vem de um teste t de Welch sobre a serie diaria de receita liquida por
 2. Estender o teste ou aumentar a amostra antes de nova decisao.
 3. Revisar dias atipicos e janelas de data antes de reanalisar.
 
-_Gerado automaticamente em 2026-08-16T22:22:13+00:00 a partir de `dataset_02_parceiroB.csv`._
+_Gerado automaticamente em 2026-08-16T22:22:47+00:00 a partir de `dataset_02_parceiroB.csv`._

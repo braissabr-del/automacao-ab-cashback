@@ -14,14 +14,14 @@ Nenhuma variante superou o controle (Grupo 1) em receita liquida (comissao - cas
 
 | Variante | Dias | Compradores | GMV | Comissao | Cashback | Receita liquida | Ticket medio | % cashback / GMV | Margem liquida | Liquido / comprador |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **Grupo 1** (controle) | 45 | 4.549 | R$ 1.738 | R$ 122 | R$ 87 | **R$ 35** | R$ 0 | 5.00% | 2.00% | R$ 0 |
-| **Grupo 2** | 45 | 4.522 | R$ 1.685 | R$ 1.446 | R$ 1.446 | **R$ 0** | R$ 0 | 85.78% | 0.00% | R$ 0 |
+| **Grupo 1** (controle) | 45 | 4.549 | R$ 1.738.460 | R$ 121.693 | R$ 86.924 | **R$ 34.769** | R$ 382 | 5.00% | 2.00% | R$ 8 |
+| **Grupo 2** | 45 | 4.522 | R$ 1.685.235 | R$ 117.967 | R$ 117.967 | **R$ 0** | R$ 373 | 7.00% | 0.00% | R$ 0 |
 
 ## 3. Comparacao vs controle
 
 | Variante | Δ Receita liquida | Δ liquido/comprador | Δ GMV | Δ Compradores | Δ Ticket | Impacto liquido no periodo | p-valor | Significante (α=0.05) |
 |---|---:|---:|---:|---:|---:|---:|---:|:--:|
-| **Grupo 2** | -100.0% | -100.0% | -3.1% | -0.6% | -2.5% | -R$ 35 | 0.0000 | Sim |
+| **Grupo 2** | -100.0% | -100.0% | -3.1% | -0.6% | -2.5% | -R$ 34.769 | 0.0000 | Sim |
 
 O p-valor vem de um teste t de Welch sobre a serie diaria de receita liquida por comprador (variancias desiguais, amostras possivelmente desbalanceadas).
 
@@ -36,4 +36,4 @@ O p-valor vem de um teste t de Welch sobre a serie diaria de receita liquida por
 2. Estender o teste ou aumentar a amostra antes de nova decisao.
 3. Revisar dias atipicos e janelas de data antes de reanalisar.
 
-_Gerado automaticamente em 2026-08-16T22:22:14+00:00 a partir de `dataset_03_parceiroC.csv`._
+_Gerado automaticamente em 2026-08-16T22:22:48+00:00 a partir de `dataset_03_parceiroC.csv`._
