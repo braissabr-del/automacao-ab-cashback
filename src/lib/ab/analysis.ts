@@ -136,10 +136,10 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
   const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
   if (lines.length < 2) throw new Error("Arquivo vazio ou sem linhas de dados.");
   const sep = [",", ";", "\t"]
-    .map((c) => ({ c, n: lines[0].split(c).length }))
-    .sort((a, b) => b.n - a.n)[0].c;
+    .map((c) => ({ c, n: (lines[0] ?? "").split(c).length }))
+    .sort((a, b) => b.n - a.n)[0]!.c;
 
-  const header = splitLine(lines[0], sep);
+  const header = splitLine(lines[0] ?? "", sep);
   const index: Partial<Record<keyof RawRow, number>> = {};
   header.forEach((h, i) => {
     const key = COLUMN_ALIASES[norm(h)];
@@ -163,7 +163,7 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
   const byKey = new Map<string, DailyRow>();
 
   for (let i = 1; i < lines.length; i++) {
-    const cells = splitLine(lines[i], sep);
+    const cells = splitLine(lines[i] ?? "", sep);
     const dateRaw = (cells[index.date!] ?? "").trim();
     const date = /^\d{4}-\d{2}-\d{2}/.test(dateRaw)
       ? dateRaw.slice(0, 10)
@@ -180,9 +180,9 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
       continue;
     }
     const buyers = Number(String(cells[index.buyers!] ?? "").replace(/\./g, "").replace(",", "."));
-    const commission = parseMoney(cells[index.commission!]);
-    const cashback = parseMoney(cells[index.cashback!]);
-    const gmv = parseMoney(cells[index.gmv!]);
+    const commission = parseMoney(cells[index.commission!] ?? "");
+    const cashback = parseMoney(cells[index.cashback!] ?? "");
+    const gmv = parseMoney(cells[index.gmv!] ?? "");
     if (![buyers, commission, cashback, gmv].every((n) => Number.isFinite(n))) {
       incomplete++;
       continue;
@@ -372,17 +372,18 @@ export function analyze(
   const { rows, warnings } = parseCsv(csvText);
   const summary = summarize(rows);
   const variants = summary.map((s) => s.group);
-  let control = options.control && variants.includes(options.control) ? options.control : variants[0];
+  const control =
+    options.control && variants.includes(options.control) ? options.control : (variants[0] ?? "");
 
   const dates = rows.map((r) => r.date).sort();
-  const periodStart = dates[0];
-  const periodEnd = dates[dates.length - 1];
+  const periodStart = dates[0] ?? "";
+  const periodEnd = dates[dates.length - 1] ?? "";
   const days = new Set(dates).size;
 
   // Janelas diferentes por variante
   const spans = variants.map((v) => {
     const d = rows.filter((r) => r.group === v).map((r) => r.date).sort();
-    return { v, min: d[0], max: d[d.length - 1], n: d.length };
+    return { v, min: d[0] ?? "", max: d[d.length - 1] ?? "", n: d.length };
   });
   if (new Set(spans.map((s) => s.min)).size > 1 || new Set(spans.map((s) => s.max)).size > 1)
     warnings.push("Variantes com janelas de data diferentes — risco de vies de sazonalidade.");
@@ -430,7 +431,7 @@ export function analyze(
       };
     });
 
-  const best = [...summary].sort((a, b) => b.net - a.net)[0];
+  const best = [...summary].sort((a, b) => b.net - a.net)[0]!;
   let decision: Decision;
   let winner: string;
   let rationale: string;
