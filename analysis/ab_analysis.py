@@ -67,9 +67,13 @@ def parse_money(value) -> float:
     negative = raw.startswith("(") and raw.endswith(")")
     raw = raw.strip("()").replace(" ", "")
     if "," in raw and "." in raw:
+        # Formato BR: ponto = milhar, virgula = decimal.
         raw = raw.replace(".", "").replace(",", ".")
     elif "," in raw:
         raw = raw.replace(",", ".")
+    elif re.fullmatch(r"\d{1,3}(\.\d{3})+", raw):
+        # 'R$ 93.390' = noventa e tres mil, nao 93,39.
+        raw = raw.replace(".", "")
     try:
         number = float(raw)
     except ValueError:
