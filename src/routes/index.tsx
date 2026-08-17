@@ -49,10 +49,10 @@ function Index() {
   return (
     <main className="min-h-screen bg-background">
       <Toaster position="top-right" />
-      <header className="border-b border-border bg-card">
+      <header className="border-b border-border bg-gradient-to-r from-primary/10 via-card to-card">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+            <span className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-chart-2 text-primary-foreground shadow-card">
               <BarChart3 className="size-5" aria-hidden />
             </span>
             <div>
