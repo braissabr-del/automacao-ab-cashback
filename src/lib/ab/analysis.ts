@@ -158,7 +158,7 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
   const missing = required.filter((k) => index[k] === undefined);
   if (missing.length)
     throw new Error(
-      `Colunas obrigatorias ausentes: ${missing.join(", ")}. Cabecalho lido: ${header.join(", ")}`,
+      `Colunas obrigatórias ausentes: ${missing.join(", ")}. Cabeçalho lido: ${header.join(", ")}`,
     );
   if (index.partner === undefined)
     warnings.push("Coluna 'Parceiro' ausente — parceiro registrado como 'Nao informado'.");
