@@ -1,6 +1,6 @@
 /**
  * Motor de análise de testes A/B de cashback.
- * Mesma logica do script Python em /analysis (parsing tolerante, metricas de
+ * Mesma lógica do script Python em /analysis (parsing tolerante, métricas de
  * margem líquida, teste t de Welch e regra de decisão).
  */
 
@@ -79,14 +79,22 @@ const norm = (s: string) =>
 const COLUMN_ALIASES: Record<string, keyof RawRow> = {
   data: "date",
   date: "date",
+  "grupos de usuarios": "group",
   "grupos de usuários": "group",
+  "grupo de usuarios": "group",
+  grupos: "group",
   grupo: "group",
   variante: "group",
   parceiro: "partner",
   compradores: "buyers",
+  buyers: "buyers",
+  comissao: "commission",
   comissão: "commission",
+  "comissao do parceiro": "commission",
+  commission: "commission",
   cashback: "cashback",
   "vendas totais": "gmv",
+  "vendas total": "gmv",
   gmv: "gmv",
 };
 
@@ -150,7 +158,7 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
   const missing = required.filter((k) => index[k] === undefined);
   if (missing.length)
     throw new Error(
-      `Colunas obrigatorias ausentes: ${missing.join(", ")}. Cabecalho lido: ${header.join(", ")}`,
+      `Colunas obrigatórias ausentes: ${missing.join(", ")}. Cabeçalho lido: ${header.join(", ")}`,
     );
   if (index.partner === undefined)
     warnings.push("Coluna 'Parceiro' ausente — parceiro registrado como 'Nao informado'.");
@@ -215,7 +223,7 @@ export function parseCsv(text: string): { rows: DailyRow[]; warnings: string[] }
   }
 
   if (badDate) warnings.push(`${badDate} linha(s) com data invalida foram descartadas.`);
-  if (incomplete) warnings.push(`${incomplete} linha(s) com metricas vazias/invalidas foram descartadas.`);
+  if (incomplete) warnings.push(`${incomplete} linha(s) com métricas vazias/inválidas foram descartadas.`);
   if (negatives) warnings.push(`${negatives} linha(s) com valores negativos — verificar origem.`);
   if (zeroBuyers) warnings.push(`${zeroBuyers} dia(s) com 0 compradores.`);
   const dups = rowsIn - badDate - incomplete - byKey.size;
@@ -388,7 +396,7 @@ export function analyze(
   if (new Set(spans.map((s) => s.min)).size > 1 || new Set(spans.map((s) => s.max)).size > 1)
     warnings.push("Variantes com janelas de data diferentes — risco de vies de sazonalidade.");
   if (new Set(spans.map((s) => s.n)).size > 1)
-    warnings.push("Variantes com numero de dias diferente (amostras desbalanceadas).");
+    warnings.push("Variantes com número de dias diferente (amostras desbalanceadas).");
 
   // Sample Ratio Mismatch
   const totalBuyers = summary.reduce((a, s) => a + s.buyers, 0);
@@ -403,7 +411,7 @@ export function analyze(
   for (const s of summary) {
     if (s.commission && Math.abs(s.cashback - s.commission) / s.commission < 0.001)
       warnings.push(
-        `${s.group}: cashback igual a comissão (margem líquida zero) — provavel erro de instrumentacao ou oferta insustentavel.`,
+        `${s.group}: cashback igual a comissão (margem líquida zero) — provável erro de instrumentação ou oferta insustentável.`,
       );
     else if (s.cashback > s.commission)
       warnings.push(`${s.group}: cashback maior que a comissão — a variante opera no negativo.`);

@@ -43,7 +43,7 @@ export function renderMarkdown(r: AnalysisResult): string {
   }
   l.push(
     "",
-    "Teste t de Welch sobre a serie diaria de receita líquida por comprador.",
+    "Teste t de Welch sobre a série diaria de receita líquida por comprador.",
     "",
     "## 4. Leitura critica dos dados",
     "",
@@ -51,13 +51,13 @@ export function renderMarkdown(r: AnalysisResult): string {
   for (const w of r.warnings) l.push(`- ${w}`);
   if (r.outliers.length)
     l.push(
-      `- ${r.outliers.length} dia(s) atipico(s) de GMV (|z| >= 3,5): ` +
+      `- ${r.outliers.length} dia(s) atípico(s) de GMV (|z| >= 3,5): ` +
         r.outliers
           .slice(0, 5)
           .map((o) => `${o.group} ${o.date} (${brl(o.gmv)}, z=${o.z})`)
           .join(", "),
     );
-  else l.push("- Nenhum dia atipico de GMV (|z| >= 3,5) detectado.");
+  else l.push("- Nenhum dia atípico de GMV (|z| >= 3,5) detectado.");
   l.push("", "## 5. Proximos passos", "");
   if (r.decision === "escalar_variante") {
     l.push(`1. Subir **${r.winner}** para 100% do tráfego do ${r.partner}.`);
@@ -66,7 +66,7 @@ export function renderMarkdown(r: AnalysisResult): string {
   } else {
     l.push(`1. Manter **${r.control}** no ar — nao ha ganho líquido comprovado.`);
     l.push("2. Estender o teste ou aumentar a amostra antes de nova decisão.");
-    l.push("3. Revisar dias atipicos e a divisão de tráfego antes de reanalisar.");
+    l.push("3. Revisar dias atípicos e a divisão de tráfego antes de reanalisar.");
   }
   l.push("", `_Gerado em ${r.generatedAt} a partir de \`${r.sourceFile}\`._`, "");
   return l.join("\n");
