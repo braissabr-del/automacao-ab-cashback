@@ -79,14 +79,22 @@ const norm = (s: string) =>
 const COLUMN_ALIASES: Record<string, keyof RawRow> = {
   data: "date",
   date: "date",
+  "grupos de usuarios": "group",
   "grupos de usuários": "group",
+  "grupo de usuarios": "group",
+  grupos: "group",
   grupo: "group",
   variante: "group",
   parceiro: "partner",
   compradores: "buyers",
+  buyers: "buyers",
+  comissao: "commission",
   comissão: "commission",
+  "comissao do parceiro": "commission",
+  commission: "commission",
   cashback: "cashback",
   "vendas totais": "gmv",
+  "vendas total": "gmv",
   gmv: "gmv",
 };
 
