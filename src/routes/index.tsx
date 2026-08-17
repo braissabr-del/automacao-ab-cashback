@@ -13,13 +13,13 @@ import { brl, int } from "@/lib/ab/format";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Analisador de Testes A/B de Cashback | Ops Integradas" },
+      { title: "Analisador Cashback Méliuz" },
       {
         name: "description",
         content:
           "Suba o CSV de um teste A/B de cashback e receba relatório executivo, leitura crítica dos dados e a decisão de qual variante escalar.",
       },
-      { property: "og:title", content: "Analisador de Testes A/B de Cashback" },
+      { property: "og:title", content: "Analisador Cashback Méliuz" },
       {
         property: "og:description",
         content:
@@ -57,10 +57,10 @@ function Index() {
             </span>
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-                Ops Integradas
+                Méliuz
               </p>
               <h1 className="text-xl font-semibold text-foreground">
-                Analisador de testes A/B de cashback
+                Analisador Cashback
               </h1>
             </div>
           </div>
