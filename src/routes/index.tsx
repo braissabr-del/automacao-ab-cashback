@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { BarChart3, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import meliuzLogo from "@/assets/meliuz-logo.png.asset.json";
 import { Toaster } from "@/components/ui/sonner";
 import { Uploader } from "@/components/ab/Uploader";
 import { DecisionBanner } from "@/components/ab/DecisionBanner";
