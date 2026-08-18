@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
-import meliuzLogo from "@/assets/meliuz-logo.png.asset.json";
+import { MELIUZ_LOGO_URL } from "@/lib/brand";
 import { Toaster } from "@/components/ui/sonner";
 import { Uploader } from "@/components/ab/Uploader";
 import { DecisionBanner } from "@/components/ab/DecisionBanner";
@@ -54,7 +54,7 @@ function Index() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
           <div className="flex items-center gap-3">
             <img
-              src={meliuzLogo.url}
+              src={MELIUZ_LOGO_URL}
               alt="Logo Méliuz"
               className="size-10 rounded-xl shadow-card"
               width={40}
