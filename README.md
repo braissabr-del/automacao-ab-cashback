@@ -256,7 +256,7 @@ reports/dataset_01_parceiroA_relatorio.md
 
 ---
 
-## 📈 Resultados dos datasets de exemplo
+##  Resultados dos datasets de exemplo
 
 A automação foi executada nos três datasets disponibilizados no projeto.
 
