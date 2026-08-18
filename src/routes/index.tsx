@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { BarChart3, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import meliuzLogo from "@/assets/meliuz-logo.png.asset.json";
 import { Toaster } from "@/components/ui/sonner";
 import { Uploader } from "@/components/ab/Uploader";
 import { DecisionBanner } from "@/components/ab/DecisionBanner";
@@ -52,9 +53,14 @@ function Index() {
       <header className="border-b border-border bg-gradient-to-r from-primary/10 via-card to-card">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-chart-2 text-primary-foreground shadow-card">
-              <BarChart3 className="size-5" aria-hidden />
-            </span>
+            <img
+              src={meliuzLogo.url}
+              alt="Logo Méliuz"
+              className="size-10 rounded-xl shadow-card"
+              width={40}
+              height={40}
+            />
+            
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">
                 Méliuz
